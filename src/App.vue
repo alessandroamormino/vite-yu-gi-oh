@@ -16,9 +16,8 @@ export default {
 </script>
 
 <template>
-  <!-- <AppLoader v-if="this.store.isLoading"></AppLoader> -->
-  <AppLoader></AppLoader>
-  <!-- <AppMain></AppMain> -->
+  <AppLoader v-if="this.store.isLoading"></AppLoader>
+  <AppMain></AppMain>
 </template>
 
 <style lang="scss">
