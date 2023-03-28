@@ -44,6 +44,7 @@ export default {
   }
 
   .name {
+    font-size: .9em;
     border: 3px outset #03937E80;
     color: white;
     text-transform: uppercase;
@@ -67,6 +68,8 @@ export default {
   }
 
   .desc {
+    font-size: .8em;
+    font-style: italic;
     padding: .2em;
     border: 5px groove rgb(124, 96, 60);
 
