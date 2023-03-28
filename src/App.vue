@@ -1,17 +1,24 @@
 <script>
+import { store } from "./store.js";
 import AppMain from "./components/AppMain.vue";
+import AppLoader from "./components/AppLoader.vue";
 export default {
   data() {
-    return {}
+    return {
+      store,
+    }
   },
   components: {
     AppMain,
+    AppLoader,
   }
 }
 </script>
 
 <template>
-  <AppMain></AppMain>
+  <!-- <AppLoader v-if="this.store.isLoading"></AppLoader> -->
+  <AppLoader></AppLoader>
+  <!-- <AppMain></AppMain> -->
 </template>
 
 <style lang="scss">
