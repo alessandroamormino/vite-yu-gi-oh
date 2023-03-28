@@ -17,11 +17,11 @@ export default {
   <div class="card"
     :class="cards.type.includes('Monster') ? 'monster' : cards.type.includes('Spell') ? 'spell' : cards.type.includes('Trap') ? 'trap' : ''">
     <div class=" name">{{ cards.name }}</div>
-    <div class="type">{{ cards.type }}</div>
-    <div class="desc">{{ cards.desc }}</div>
+    <div class="type">{{ '[ ' + cards.type + ' ]' }}</div>
     <div class="image">
       <img :src="cards.card_images[0].image_url_cropped" alt="">
     </div>
+    <div class="desc">{{ cards.desc }}</div>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -44,11 +44,39 @@ export default {
   }
 
   .name {
-    border: 5px outset white;
+    border: 3px outset #03937E80;
+    color: white;
+    text-transform: uppercase;
   }
 
-  img {
-    width: 100%;
+  .type {
+    text-align: right;
+    text-transform: uppercase;
+    font-size: .8em;
+    font-weight: bold;
+    margin: .5em 0;
+  }
+
+  .image {
+    padding: .5em;
+
+    img {
+      width: 100%;
+      border: 5px outset #546271;
+    }
+  }
+
+  .desc {
+    padding: .2em;
+    border: 5px groove rgb(124, 96, 60);
+
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: block;
+    line-height: 1em;
+    max-height: 5em;
   }
 }
 </style>
