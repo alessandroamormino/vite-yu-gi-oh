@@ -2,6 +2,7 @@
 import { store } from "../store.js";
 import axios from 'axios';
 import CardItem from "./CardItem.vue";
+import CardSearch from "./CardSearch.vue";
 
 export default {
   name: 'AppMain',
@@ -12,9 +13,28 @@ export default {
   },
   components: {
     CardItem,
+    CardSearch,
   },
+  methods: {
+    filter() {
+      let newAPIStrin = `${this.store.stringAPI}`;
+
+      if (this.store.cardName != '') {
+        newAPIStrin += `&fname=${this.store.cardName}`;
+      }
+      if (this.store.cardType != '') {
+        newAPIStrin += `&type=${this.store.cardType}`;
+      }
+
+      axios.get(newAPIStrin).then((res) => {
+        this.store.cards = res.data.data;
+        this.store.isLoading = false;
+      });
+    }
+  },
+
   created() {
-    axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=2000&offset=0').then((res) => {
+    axios.get(this.store.stringAPI).then((res) => {
       this.store.cards = res.data.data;
       this.store.isLoading = false;
     });
@@ -23,7 +43,8 @@ export default {
 </script>
 <template>
   <div class="container" v-if="this.store.isLoading == false">
-    <h1>YuGiOh Cards</h1>
+    <h1>YuGiOh Cards - API</h1>
+    <CardSearch @filterCard="filter()"></CardSearch>
     <div id="card-list">
       <CardItem v-for="card in store.cards" :cards="card"></CardItem>
     </div>
