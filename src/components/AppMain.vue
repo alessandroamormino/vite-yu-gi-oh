@@ -3,6 +3,7 @@ import { store } from "../store.js";
 import axios from 'axios';
 import CardItem from "./CardItem.vue";
 import CardSearch from "./CardSearch.vue";
+import CardCount from "./CardCount.vue";
 
 export default {
   name: 'AppMain',
@@ -14,6 +15,7 @@ export default {
   components: {
     CardItem,
     CardSearch,
+    CardCount
   },
   methods: {
     filter() {
@@ -45,6 +47,7 @@ export default {
   <div class="container" v-if="this.store.isLoading == false">
     <h1>YuGiOh Cards - API</h1>
     <CardSearch @filterCard="filter()"></CardSearch>
+    <CardCount></CardCount>
     <div id="card-list">
       <CardItem v-for="card in store.cards" :cards="card"></CardItem>
     </div>

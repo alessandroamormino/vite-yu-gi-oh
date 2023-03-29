@@ -31,6 +31,12 @@ export default {
 
   border: 10px solid #00000090;
 
+  transition: transform .2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
   &.spell {
     background-color: #03937E;
   }
@@ -81,5 +87,7 @@ export default {
     line-height: 1em;
     max-height: 5em;
   }
+
+
 }
 </style>
