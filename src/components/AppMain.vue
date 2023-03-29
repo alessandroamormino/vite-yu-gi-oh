@@ -52,9 +52,9 @@ export default {
   <div class="container" v-if="this.store.isLoading == false">
     <h1>YuGiOh Cards - API</h1>
     <CardSearch @filterCard="filter()"></CardSearch>
-    <CardCount></CardCount>
+    <CardCount v-if="this.store.error == ''"></CardCount>
     <AppError v-if="this.store.error != ''"></AppError>
-    <div id="card-list">
+    <div id="card-list" v-if="this.store.error == ''">
       <CardItem v-for="card in store.cards" :cards="card"></CardItem>
     </div>
   </div>
