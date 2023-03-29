@@ -4,6 +4,7 @@ import axios from 'axios';
 import CardItem from "./CardItem.vue";
 import CardSearch from "./CardSearch.vue";
 import CardCount from "./CardCount.vue";
+import AppError from "./AppError.vue";
 
 export default {
   name: 'AppMain',
@@ -15,7 +16,8 @@ export default {
   components: {
     CardItem,
     CardSearch,
-    CardCount
+    CardCount,
+    AppError,
   },
   methods: {
     filter() {
@@ -31,6 +33,9 @@ export default {
       axios.get(newAPIStrin).then((res) => {
         this.store.cards = res.data.data;
         this.store.isLoading = false;
+        this.store.error = '';
+      }).catch((error) => {
+        this.store.error = error.response.status;
       });
     }
   },
@@ -48,21 +53,25 @@ export default {
     <h1>YuGiOh Cards - API</h1>
     <CardSearch @filterCard="filter()"></CardSearch>
     <CardCount></CardCount>
+    <AppError v-if="this.store.error != ''"></AppError>
     <div id="card-list">
       <CardItem v-for="card in store.cards" :cards="card"></CardItem>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
-h1 {
-  text-align: center;
-  padding: 1em;
-}
+.container {
+  h1 {
+    text-align: center;
+    padding: 1em;
+  }
 
-#card-list {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  gap: 1em;
+  #card-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 1em;
+  }
+
 }
 </style>
